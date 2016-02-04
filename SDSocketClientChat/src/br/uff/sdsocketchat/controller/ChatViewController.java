@@ -14,6 +14,7 @@ public class ChatViewController implements ActionListener
 
 	private ChatView 		view;
 	private ChatViewModel 	model;
+	private String 			userName;
 	
 	public ChatViewController (  ) 
 	{
@@ -26,9 +27,28 @@ public class ChatViewController implements ActionListener
 	{
 		JButton button 			= (JButton)e.getSource();
 		ChatViewPanel panel 	= (ChatViewPanel)button.getParent();
-		String message			= panel.getMessageToBeSent();
 		
-		model.sendMessage(message);
+		if(button.getName().equalsIgnoreCase("Send"))
+		{
+			String message		= panel.getMessageToBeSent();
+			
+			message 			= this.userName + ">> " + message;
+			
+			panel.clearMessageToBeSent();
+			panel.setMessagePanel(message);
+			model.sendMessage(message);
+		}
+		else if(button.getName().equalsIgnoreCase("Login"))
+		{
+			String userName = panel.getUserName();
+			this.userName	= userName;
+			
+			String messageToAnnounceLogin = "Login " + userName;
+			panel.LogIn();
+			model.sendMessage(messageToAnnounceLogin);
+			
+		}
+		
 		
 	}
 

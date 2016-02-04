@@ -24,6 +24,13 @@ public class UserReceiver implements Runnable
 			while(inputStream.hasNext())
 			{
 				String message = inputStream.nextLine();
+				
+				if(message.indexOf("Login") >= 0)
+				{
+					String temp = message.split(" ")[1];
+					message		= "Usurário >> " + temp + " << acabou de entrar no chat";
+				}
+				
 				System.out.println("Receiving message from: " + this.socket.getInetAddress().toString() + " Message: " + message);
 				this.user.broadcastMessage(message);
 			}

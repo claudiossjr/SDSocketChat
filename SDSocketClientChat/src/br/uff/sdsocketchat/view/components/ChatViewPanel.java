@@ -4,6 +4,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import org.omg.CORBA.INITIALIZE;
 
@@ -14,6 +15,9 @@ public class ChatViewPanel extends JPanel
 	private JTextArea 			messageArea;
 	private JButton 			btSend;
 	private JTextArea			messageToBeSend;
+	
+	private JTextField			tfUserName;
+	private JButton				btLogin;
 	
 	private ChatViewController controller;
 	
@@ -43,7 +47,11 @@ public class ChatViewPanel extends JPanel
 						)
 				)
 				.addContainerGap(10,10)
-				.addGroup(layout.createParallelGroup()
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+						.addGap(10)
+						.addComponent(tfUserName)
+						.addGap(10)
+						.addComponent(btLogin)
 				)
 				.addContainerGap(10,10)
 		);
@@ -62,7 +70,9 @@ public class ChatViewPanel extends JPanel
 								)
 						)
 						.addGroup(layout.createSequentialGroup()
-								
+								.addComponent(tfUserName,20,20,20)
+								.addContainerGap()
+								.addComponent(btLogin,20,20,20)
 						)
 				)
 				.addContainerGap(10,10)
@@ -75,24 +85,50 @@ public class ChatViewPanel extends JPanel
 	private void initComponents() 
 	{
 		this.messageArea 		= new JTextArea();
+		this.messageArea.setEditable(false);
 		this.btSend				= new JButton("Send");
+		this.btSend.setName("Send");
 		this.messageToBeSend 	= new JTextArea();
+		
+		this.tfUserName			= new JTextField();
+		this.btLogin			= new JButton("Login");
+		this.btLogin.setName("Login");
+		
+		LogOut();
+	}
+	
+	public void LogIn()
+	{
+		this.btSend.setEnabled(true);
+		this.messageToBeSend.setEnabled(true);
+		
+		this.tfUserName.setEnabled(false);
+		this.btLogin.setEnabled(false);
+	}
+	
+	public void LogOut()
+	{
+		this.btSend.setEnabled(false);
+		this.messageToBeSend.setEnabled(false);
+		
+		this.tfUserName.setEnabled(true);
+		this.btLogin.setEnabled(true);
 	}
 	
 	private void initListeners() 
 	{
 		btSend.addActionListener(controller);
+		btLogin.addActionListener(controller);
 	}
 	
 	public String getMessageToBeSent()
 	{
 		String message = messageToBeSend.getText();
-		clearMessageToBeSent();
-		setMessagePanel(message);
+		
 		return message; 
 	}
 
-	private void clearMessageToBeSent()
+	public void clearMessageToBeSent()
 	{
 		setMessageToBeSent("");
 	}
@@ -106,6 +142,11 @@ public class ChatViewPanel extends JPanel
 	{
 		String newMessage = (messageArea.getText().length() > 0)? messageArea.getText() + "\n" + message : message;
 		messageArea.setText(newMessage);
+	}
+	
+	public String getUserName()
+	{
+		return this.tfUserName.getText();
 	}
 	
 }
