@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import br.uff.sdsocketchat.model.ChatViewModel;
 import br.uff.sdsocketchat.view.ChatView;
@@ -41,12 +42,17 @@ public class ChatViewController implements ActionListener
 		else if(button.getName().equalsIgnoreCase("Login"))
 		{
 			String userName = panel.getUserName();
-			this.userName	= userName;
-			
-			String messageToAnnounceLogin = "Login " + userName;
-			panel.LogIn();
-			model.sendMessage(messageToAnnounceLogin);
-			
+			this.userName	= userName.trim();
+			if(this.userName != null && !this.userName.isEmpty())
+			{
+				String messageToAnnounceLogin = "Login " + userName;
+				panel.LogIn();
+				model.sendMessage(messageToAnnounceLogin);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Username can not be empty.");
+			}
 		}
 		
 		

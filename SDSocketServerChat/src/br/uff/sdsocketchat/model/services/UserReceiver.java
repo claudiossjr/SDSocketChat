@@ -27,8 +27,12 @@ public class UserReceiver implements Runnable
 				
 				if(message.indexOf("Login") >= 0)
 				{
-					String temp = message.split(" ")[1];
-					message		= "Usurário >> " + temp + " << acabou de entrar no chat";
+					String[] temp = message.split(" ");
+					if( temp.length == 2 )
+					{
+						message		= "Usurário >> " + temp[1] + " << acabou de entrar no chat";
+					}
+					
 				}
 				
 				System.out.println("Receiving message from: " + this.socket.getInetAddress().toString() + " Message: " + message);
