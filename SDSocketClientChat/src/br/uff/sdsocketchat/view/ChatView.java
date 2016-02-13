@@ -1,10 +1,8 @@
 package br.uff.sdsocketchat.view;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import br.uff.sdsocketchat.controller.ChatViewController;
 import br.uff.sdsocketchat.view.components.ChatViewPanel;
@@ -23,6 +21,24 @@ public class ChatView
 		frame.setSize(800, 600);
 		frame.add(this.chatPanel);
 		frame.setVisible(true);
+		
+		try {
+            // Set System L&F
+			UIManager.setLookAndFeel(
+            UIManager.getSystemLookAndFeelClassName());
+	    } 
+	    catch (UnsupportedLookAndFeelException e) {
+	       // handle exception
+	    }
+	    catch (ClassNotFoundException e) {
+	       // handle exception
+	    }
+	    catch (InstantiationException e) {
+	       // handle exception
+	    }
+	    catch (IllegalAccessException e) {
+	       // handle exception
+	    }		
 		
 	}
 
