@@ -16,11 +16,13 @@ public class ChatViewController implements ActionListener
 	private ChatView 		view;
 	private ChatViewModel 	model;
 	private String 			userName;
+	private boolean			logged;
 	
 	public ChatViewController (  ) 
 	{
 		this.model 		= new ChatViewModel(this);
 		this.view 		= new ChatView(this);
+		this.logged		= false;
 	}
 	
 	@Override
@@ -48,6 +50,7 @@ public class ChatViewController implements ActionListener
 				String messageToAnnounceLogin = "Login " + userName;
 				panel.LogIn();
 				model.sendMessage(messageToAnnounceLogin);
+				logged = true;
 			}
 			else
 			{
@@ -60,7 +63,8 @@ public class ChatViewController implements ActionListener
 
 	public void showMessage(String message) 
 	{
-		view.showMessage (message);
+		if(this.logged)
+			view.showMessage (message);
 	}
 
 }
