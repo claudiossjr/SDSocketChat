@@ -15,7 +15,7 @@ public class User
 	public User( ChatViewModel model )
 	{
 		try {
-			this.server				= new Socket ("localhost",12345);
+			this.server				= new Socket ("187.67.225.105",12345);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
