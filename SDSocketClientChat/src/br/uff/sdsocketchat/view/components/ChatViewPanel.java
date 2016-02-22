@@ -3,6 +3,7 @@ package br.uff.sdsocketchat.view.components;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -13,6 +14,7 @@ import br.uff.sdsocketchat.controller.ChatViewController;
 public class ChatViewPanel extends JPanel
 {
 	private JTextArea 			messageArea;
+	private JScrollPane			jsp;
 	private JButton 			btSend;
 	private JTextArea			messageToBeSend;
 	
@@ -38,7 +40,7 @@ public class ChatViewPanel extends JPanel
 				.addContainerGap(10,10)
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(messageArea,680,680,680)
+								.addComponent(this.jsp,680,680,680)
 						)
 						.addGroup(layout.createSequentialGroup()
 								.addComponent(messageToBeSend,620,620,620)
@@ -61,7 +63,7 @@ public class ChatViewPanel extends JPanel
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addGroup(layout.createSequentialGroup()
 								.addGroup(layout.createParallelGroup()
-										.addComponent(messageArea,540,540,540)
+										.addComponent(this.jsp,540,540,540)
 								)
 								.addContainerGap(10,10)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -85,6 +87,8 @@ public class ChatViewPanel extends JPanel
 	private void initComponents() 
 	{
 		this.messageArea 		= new JTextArea();
+		this.jsp 				= new JScrollPane(this.messageArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		this.messageArea.setEditable(false);
 		this.btSend				= new JButton("Send");
 		this.btSend.setName("Send");
